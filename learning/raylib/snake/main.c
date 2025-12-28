@@ -23,6 +23,8 @@
 //----------------------------------------------------------------------------------
 #define SNAKE_LENGTH   256
 #define SQUARE_SIZE     31
+#define WARMWHITE   CLITERAL(Color){ 255, 244, 229, 255 }
+#define WARMGREEN CLITERAL(Color){ 120, 180, 90, 255 }
 
 //----------------------------------------------------------------------------------
 // Types and Structures Definition
@@ -126,8 +128,8 @@ void InitGame(void)
         snake[i].size = (Vector2){ SQUARE_SIZE, SQUARE_SIZE };
         snake[i].speed = (Vector2){ SQUARE_SIZE, 0 };
 
-        if (i == 0) snake[i].color = DARKBLUE;
-        else snake[i].color = BLUE;
+        if (i == 0) snake[i].color = DARKGREEN;      // head
+        else snake[i].color = WARMGREEN;        // else body
     }
 
     for (int i = 0; i < SNAKE_LENGTH; i++)
@@ -136,7 +138,7 @@ void InitGame(void)
     }
 
     fruit.size = (Vector2){ SQUARE_SIZE, SQUARE_SIZE };
-    fruit.color = SKYBLUE;
+    fruit.color = RED;
     fruit.active = false;
 }
 
@@ -150,22 +152,22 @@ void UpdateGame(void)
         if (!pause)
         {
             // Player control
-            if (IsKeyPressed(KEY_RIGHT) && (snake[0].speed.x == 0) && allowMove)
+            if (IsKeyPressed(KEY_D) && (snake[0].speed.x == 0) && allowMove)
             {
                 snake[0].speed = (Vector2){ SQUARE_SIZE, 0 };
                 allowMove = false;
             }
-            if (IsKeyPressed(KEY_LEFT) && (snake[0].speed.x == 0) && allowMove)
+            if (IsKeyPressed(KEY_A) && (snake[0].speed.x == 0) && allowMove)
             {
                 snake[0].speed = (Vector2){ -SQUARE_SIZE, 0 };
                 allowMove = false;
             }
-            if (IsKeyPressed(KEY_UP) && (snake[0].speed.y == 0) && allowMove)
+            if (IsKeyPressed(KEY_W) && (snake[0].speed.y == 0) && allowMove)
             {
                 snake[0].speed = (Vector2){ 0, -SQUARE_SIZE };
                 allowMove = false;
             }
-            if (IsKeyPressed(KEY_DOWN) && (snake[0].speed.y == 0) && allowMove)
+            if (IsKeyPressed(KEY_S) && (snake[0].speed.y == 0) && allowMove)
             {
                 snake[0].speed = (Vector2){ 0, SQUARE_SIZE };
                 allowMove = false;
@@ -245,7 +247,7 @@ void DrawGame(void)
 {
     BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(WARMWHITE);
 
         if (!gameOver)
         {
