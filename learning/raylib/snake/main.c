@@ -76,7 +76,7 @@ int main(void)
 {
     // Initialization (Note windowTitle is unused on Android)
     //---------------------------------------------------------
-    InitWindow(screenWidth, screenHeight, "classic game: snake");
+    InitWindow(screenWidth, screenHeight, "snake in c: raylib");
 
     InitGame();
 
